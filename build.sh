@@ -15,6 +15,7 @@ tmp() {
 
 mkbase() {
 		cd $TMP
+		env
 		fakechroot fakeroot debootstrap --verbose --arch $ARCH --variant fakechroot $REL $ROOTFS/ $MIRROR
 }
 
