@@ -15,7 +15,7 @@ tmp() {
 
 mkbase() {
 		cd $TMP
-		fakeroot debootstrap --arch $ARCH $REL $ROOTFS/ $MIRROR
+		fakechroot fakeroot debootstrap --arch $ARCH --variant fakechroot $REL $ROOTFS/ $MIRROR
 }
 
 conf() {
@@ -64,3 +64,4 @@ mkbase
 echo "Pack image..."
 pack
 echo "Finished!"
+exit 0
