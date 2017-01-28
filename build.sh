@@ -15,7 +15,7 @@ tmp() {
 
 mkbase() {
 		cd $TMP
-		debootstrap --arch $ARCH $REL $ROOTFS $MIRROR
+		debootstrap --arch $ARCH $REL $ROOTFS/ $MIRROR
 }
 
 conf() {
