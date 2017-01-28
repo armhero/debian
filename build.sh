@@ -30,7 +30,7 @@ pack() {
 	id=$(sudo tar --numeric-owner -C $ROOTFS -c . | docker import - armhero/debian:$REL)
 
 	docker tag $id armhero/debian:$TAG
-	docker run --rm armhero/debian:$TAG sh -c "echo debian:${REL} with id=${id} and tag=${TAG} created!\n'"
+	docker run --rm armhero/debian:$TAG cat /etc/os-release
 }
 
 while getopts ":a:r:m:t:h" opt; do
