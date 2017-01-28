@@ -8,15 +8,14 @@ usage() {
 }
 
 tmp() {
-	TMP=$(mktemp -d ${TMPDIR:-/tmp}/debian-docker-XXXXXXXXXX)
-	ROOTFS=$(mktemp -d ${TMPDIR:-/tmp}/debian-docker-rootfs-XXXXXXXXXX)
+	TMP=$(mktemp -d ${TMPDIR:-$PWD}/debian-docker-XXXXXXXXXX)
+	ROOTFS=$(mktemp -d ${TMPDIR:-$PWD}/debian-docker-rootfs-XXXXXXXXXX)
 	trap "rm -rf $TMP $ROOTFS" EXIT TERM INT
 }
 
 mkbase() {
-		cd $TMP
-		env
-		fakechroot fakeroot debootstrap --verbose --arch $ARCH --variant fakechroot $REL $ROOTFS/ $MIRROR
+	cd $TMP
+	fakechroot fakeroot debootstrap --verbose --arch $ARCH --variant fakechroot $REL $ROOTFS/ $MIRROR
 }
 
 conf() {
