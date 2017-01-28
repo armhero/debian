@@ -3,7 +3,7 @@
 set -e
 
 usage() {
-	printf >&2 '%s: [-r release] [-t tag] [-m mirror] [-t tag]\n' "$0"
+	printf >&2 '%s: [-a arch] [-r release] [-t tag] [-m mirror] [-t tag]\n' "$0"
 	exit 1
 }
 
@@ -15,7 +15,7 @@ tmp() {
 
 mkbase() {
 		cd $TMP
-		fakechroot fakeroot debootstrap --arch $ARCH --variant fakechroot $REL $ROOTFS/ $MIRROR
+		fakechroot fakeroot debootstrap --verbose --arch $ARCH --variant fakechroot $REL $ROOTFS/ $MIRROR
 }
 
 conf() {
@@ -25,14 +25,17 @@ conf() {
 
 pack() {
 	local id
-	id=$(tar --numeric-owner -C $ROOTFS -c . | docker import - armhero/debian:$REL)
+	id=$(sudo tar --numeric-owner -C $ROOTFS -c . | docker import - armhero/debian:$REL)
 
 	docker tag $id armhero/debian:$TAG
 	docker run --rm armhero/debian:$TAG sh -c "echo debian:${REL} with id=${id} and tag=${TAG} created!\n'"
 }
 
-while getopts ":r:m:t:h" opt; do
+while getopts ":a:r:m:t:h" opt; do
 	case $opt in
+		a)
+		  REL=$OPTARG
+		  ;;
 		r)
 			REL=$OPTARG
 			;;
