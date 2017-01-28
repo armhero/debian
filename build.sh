@@ -62,6 +62,8 @@ MIRROR=${MIRROR:-http://httpredir.debian.org/debian/}
 ARCH=${ARCH:-armhf}
 TAG=${TAG:-latest}
 
+echo "Create tmp..."
+tmp
 echo "Create baseimage..."
 mkbase
 #echo "Configure package lists..."
