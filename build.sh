@@ -36,7 +36,7 @@ pack() {
 while getopts ":a:r:m:t:h" opt; do
 	case $opt in
 		a)
-		  REL=$OPTARG
+		  ARCH=$OPTARG
 		  ;;
 		r)
 			REL=$OPTARG
