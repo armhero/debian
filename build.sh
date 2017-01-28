@@ -27,7 +27,7 @@ conf() {
 
 pack() {
 	local id
-	id=$(sudo tar --numeric-owner -C $ROOTFS -c . | docker import - armhero/debian:$REL)
+	id=$(tar --numeric-owner -C $ROOTFS -c . | docker import - armhero/debian:$REL)
 
 	docker tag $id armhero/debian:$TAG
 	docker run --rm armhero/debian:$TAG cat /etc/os-release
