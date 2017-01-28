@@ -1,6 +1,7 @@
 #!/bin/sh
 
 set -e
+set -x
 
 usage() {
 	printf >&2 '%s: [-a arch] [-r release] [-t tag] [-m mirror] [-t tag]\n' "$0"
@@ -15,6 +16,7 @@ tmp() {
 
 mkbase() {
 	cd $TMP
+	echo "Creating rootfs in $ROOTFS"
 	fakechroot fakeroot debootstrap --verbose --arch $ARCH --variant fakechroot $REL $ROOTFS/ $MIRROR
 }
 
