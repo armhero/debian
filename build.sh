@@ -17,7 +17,7 @@ tmp() {
 mkbase() {
 	cd $TMP
 	echo "Creating rootfs in $ROOTFS"
-	fakechroot fakeroot debootstrap --verbose --arch $ARCH --variant fakechroot $REL $ROOTFS/ $MIRROR
+	debootstrap --verbose --arch $ARCH --variant minbase $REL $ROOTFS/ $MIRROR
 }
 
 conf() {
@@ -116,6 +116,8 @@ EOF
 		Acquire::CompressionTypes::Order:: "gz";
 		EOF
 	fi
+
+	chroot "$ROOTFS" bash -c 'apt-get update && apt-get dist-upgrade -y'
 
 	rm -rf "$ROOTFS/var/lib/apt/lists"/*
 }
