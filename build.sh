@@ -17,7 +17,7 @@ tmp() {
 mkbase() {
 	cd $TMP
 	echo "Creating rootfs in $ROOTFS"
-	debootstrap --verbose --arch $ARCH --variant minbase $REL $ROOTFS/ $MIRROR
+	debootstrap --arch $ARCH --variant minbase $REL $ROOTFS/ $MIRROR
 }
 
 conf() {
