@@ -4,6 +4,8 @@
 
 A Debian Linux Docker base image for the ARM platform.
 
+*Does only work on Raspberry 2 and above due lack of armv6 support.*
+
 ## Available tags
 
 * **latest**: Latest stable image (e.g. jessie)
